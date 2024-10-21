@@ -5,8 +5,8 @@ from typing import Optional
 class CreateMVPLog(BaseModel):
     site: str
     action: str
-    email: Optional[EmailStr] | None
-    detail: Optional[str] | None
+    email: Optional[EmailStr] | None = None
+    detail: Optional[str] | None = None
 
 
 class MVPLog(CreateMVPLog):
