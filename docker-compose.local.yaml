@@ -1,0 +1,72 @@
+services:
+
+  app:
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: behaviour_app
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      BEHAVIOUR_DB_HOST: db:5432 # not nescessary to be the same as the db ports, because of the network
+      BEHAVIOUR_DB_NAME: behaviour_db
+      BEHAVIOUR_DB_USER: postgres
+      BEHAVIOUR_DB_PASW: postgres
+      BEHAVIOUR_DB_TYPE: postgresql
+      API_KEY: test
+      # SENTRY_INGEST_URL:
+      # SENTRY_ENVIRONMENT:
+
+    depends_on:
+      db:
+        condition: service_healthy
+      
+    develop:
+      watch: # add debug mode in the dockerfile for this to work
+        - action: sync
+          path: .
+          target: /code
+
+    stdin_open: true # allow breakpoints
+    tty: true # allow breakpoints
+
+    volumes:
+      - .:/behaviour
+
+    networks:
+      - behaviour_network
+
+  db:
+    image: postgres:15
+    container_name: behaviour_db
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: behaviour_db
+
+    ports:
+      - "5440:5432"
+
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+    networks:
+      - behaviour_network
+
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+
+volumes:
+  db_data:
+
+networks:
+  behaviour_network:
+
