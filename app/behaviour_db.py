@@ -20,8 +20,11 @@ class DatabaseConnection:
         self.BEHAVIOUR_DB_PASW = getenv("BEHAVIOUR_DB_PASW")
         self.BEHAVIOUR_DB_TYPE = getenv("BEHAVIOUR_DB_TYPE")
 
-        self.DATABASE_URL = f"{self.BEHAVIOUR_DB_TYPE}://{self.BEHAVIOUR_DB_USER}:{self.BEHAVIOUR_DB_PASW}@{self.BEHAVIOUR_DB_HOST}/{self.BEHAVIOUR_DB_NAME}"
-
+        self.DATABASE_URL: str = (
+            f"{self.BEHAVIOUR_DB_TYPE}://"
+            f"{self.BEHAVIOUR_DB_USER}:{self.BEHAVIOUR_DB_PASW}@"
+            f"{self.BEHAVIOUR_DB_HOST}/{self.BEHAVIOUR_DB_NAME}"
+        )
         self.engine = None
         self.SessionLocal = None
         self.Base = declarative_base()
