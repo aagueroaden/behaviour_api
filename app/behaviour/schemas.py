@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 
 class CreateSite(BaseModel):
@@ -9,7 +9,7 @@ class CreateSite(BaseModel):
 
 class Site(CreateSite):
     id: int
-    actions: List[Action]
+    actions: Optional[List[Action]] = []
 
     class ConfigDict:
         from_attributes = True

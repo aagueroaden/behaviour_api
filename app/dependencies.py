@@ -2,6 +2,7 @@
 
 from app.behaviour_db import behaviour_db
 from app.behaviour.service import BehaviourService
+from app.mvp_logging.services import MVPLogService
 from sqlalchemy.orm import Session
 from fastapi import Depends, Header, HTTPException
 import os
@@ -20,3 +21,7 @@ def get_db() -> Session:
 
 def get_behaviour_service(db: Session = Depends(get_db)) -> BehaviourService:
     return BehaviourService(db)
+
+
+def get_mvp_log_service(db: Session = Depends(get_db)) -> MVPLogService:
+    return MVPLogService(db)

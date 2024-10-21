@@ -1,4 +1,5 @@
 from app.behaviour.module import behaviour_module
+from app.mvp_logging.module import mvp_log_module
 from app.behaviour import models
 from app.behaviour_db import engine
 from app.sentry import initialize_sentry
@@ -42,6 +43,7 @@ app.add_middleware(
 
 # Include the behaviour module
 app.include_router(behaviour_module)
+app.include_router(mvp_log_module)
 
 
 # generic endpoint
