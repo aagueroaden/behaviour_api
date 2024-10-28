@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
 import sys
+# from prometheus_fastapi_instrumentator import Instrumentator
 
 
 @asynccontextmanager
@@ -44,6 +45,8 @@ app.add_middleware(
 # Include the behaviour module
 app.include_router(behaviour_module)
 app.include_router(mvp_log_module)
+
+# Instrumentator().instrument(app).expose(app)
 
 
 # generic endpoint

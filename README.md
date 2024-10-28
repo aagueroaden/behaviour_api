@@ -14,20 +14,22 @@ it is the minimun viable product, where we will test the concept of the api work
 build and run
 
 ```sh
-docker compose -f docker-compose.local.yaml up --build -d
+docker compose -f docker-compose.yml up --build -d
 ```
 
 restart
 
 ```sh
-docker compose -f docker-compose.local.yaml restart
+docker compose -f docker-compose.yml restart
 ```
 
 stop
 
 ```sh
-docker compose -f docker-compose.local.yaml stop
+docker compose -f docker-compose.yml stop
 ```
+
+im testing something with grafana, for that is the `docker-compose.local.yaml`
 
 ### As a service
 

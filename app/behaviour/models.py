@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List, Optional
 
-from sqlalchemy import ForeignKey, String
+from sqlalchemy import ForeignKey, String, DateTime, func
 from sqlalchemy.orm import (
     Mapped,
     mapped_column,
@@ -34,3 +34,6 @@ class Log(Base):
     action_id: Mapped[int] = mapped_column(ForeignKey("action.id"))
     detail: Mapped[str] = mapped_column(String)
     email: Mapped[Optional[str]] = mapped_column(String)
+    create_date: Mapped[Optional[DateTime]] = mapped_column(
+        DateTime, server_default=func.now(), nullable=False
+    )

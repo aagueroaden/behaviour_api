@@ -1,6 +1,7 @@
 from __future__ import annotations
 from pydantic import BaseModel
 from typing import List, Optional
+from datetime import datetime
 
 
 class CreateSite(BaseModel):
@@ -34,6 +35,7 @@ class CreateLog(BaseModel):
 
 class Log(CreateLog):
     id: int
+    create_date: datetime
 
     class ConfigDict:
         from_attributes = True

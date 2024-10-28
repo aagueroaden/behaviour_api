@@ -62,7 +62,7 @@ class DatabaseConnection:
         return self.Base
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))  # try to reconect 3 times every 5 sec
-    def get_db(self) -> Generator[Session, None, None]:
+    def get_session(self) -> Generator[Session, None, None]:
         """Dependency to get the database session."""
         db = self.SessionLocal()
         try:

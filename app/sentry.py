@@ -68,7 +68,7 @@ def initialize_sentry():
             integrations=[sentry_logging],
             environment=sentry_enviroment,
             before_send=before_send,
-            before_send_transaction=before_send_transaction,
+            # before_send_transaction=before_send_transaction,
         )
         print("loggend in sentry env:{sentry_enviroment}, url={sentry_dashboard_url}".format(
             sentry_enviroment=sentry_enviroment, sentry_dashboard_url=sentry_dashboard_url))

@@ -15,13 +15,13 @@ async def validate_public_api_key(api_key: str = Header(...)):
         raise HTTPException(status_code=403, detail="Unauthorized API Key")
 
 
-def get_db() -> Session:
-    return next(behaviour_db.get_db())
+def get_behaviour_session() -> Session:
+    return next(behaviour_db.get_session())
 
 
-def get_behaviour_service(db: Session = Depends(get_db)) -> BehaviourService:
+def get_behaviour_service(db: Session = Depends(get_behaviour_session)) -> BehaviourService:
     return BehaviourService(db)
 
 
-def get_mvp_log_service(db: Session = Depends(get_db)) -> MVPLogService:
+def get_mvp_log_service(db: Session = Depends(get_behaviour_session)) -> MVPLogService:
     return MVPLogService(db)
